@@ -1,5 +1,4 @@
 # projectX
-new Java project
-The begining  of first Java program.
-New changes...
-More new...
+Java projects.
+Lessons and tasks.
+
