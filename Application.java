@@ -16,52 +16,51 @@ class Application {
 		Laptop[] laps = new Laptop[r];
 		
 		for(int i=0; i < laps.length; i++) {// Filling array of users and laptops using 2 auto methods
-			laps[i] = new Laptop();				
+			laps[i] = new Laptop();
+			User user = new User();	
 		
 			laps[i].setSize(setRandom("size"));
 			laps[i].setPrice(setRandom("price"));
-			laps[i].user.setName(setRandomHuman("name"));
-			laps[i].user.setLastName(setRandomHuman("lastName"));
+			user.setName(setRandomHuman("name"));
+			user.setLastName(setRandomHuman("lastName"));
+			laps[i].setUser(user);
 			
 			if(i % 10 == 0){
 				System.out.println("\nSize:\tPrice:\tName:\tLastname:");
 			}
-			System.out.println(laps[i].getSize() + "\t" + laps[i].getPrice() + "\t" + laps[i].user.getName() + "\t" + laps[i].user.getLastName());	
+			System.out.println(laps[i].getSize() + "\t" + laps[i].getPrice() + "\t" + laps[i].getUser().getName() + "\t" + laps[i].getUser().getLastName());	
 		}				
 		System.out.print("Choose method of sorting by bubble for Laptops:\n(1) - Size\t(2) - Price\n");
 		sortBubble(reader.readLine(), laps);				
 	}
 	
-static void sortBubble(String param, Laptop [] laps) {
-	
-		
-			double val1=0, val2=0;
-			String s = null;
-			for(int i = laps.length - 1; i > 0; i--) {
-				for(int j = 0; j < i; j++) {
-									
-					if(param.equals("1")) {
-						val1 = laps[j].getSize();
-						val2 = laps[j+1].getSize();
-						s = "SIZE";
-						}
+	static void sortBubble(String param, Laptop [] laps) {
+		double val1=0, val2=0;
+		String s = null;
+		for(int i = laps.length - 1; i > 0; i--) {
+			for(int j = 0; j < i; j++) {
+				if(param.equals("1")) {
+					val1 = laps[j].getSize();
+					val2 = laps[j+1].getSize();
+					s = "SIZE";
+				}
 					
-					if(param.equals("2")) {
-						val1 = laps[j].getPrice();
-						val2 = laps[j+1].getPrice();
-						s = "PRICE";
-						}
+				if(param.equals("2")) {
+					val1 = laps[j].getPrice();
+					val2 = laps[j+1].getPrice();
+					s = "PRICE";
+				}
 					
-						if(val1 < val2) {
-							Laptop a = laps[j];
-							laps[j] = laps[j+1];
-							laps[j+1] = a;
-						}
-					}
+				if(val1 < val2) {
+					Laptop a = laps[j];
+					laps[j] = laps[j+1];
+					laps[j+1] = a;
+				}
+			}
 				
-				if(i % 10 == 0){
-					System.out.println("\nSORTED LIST BY " + s + " :\nSize:\tPrice:\tName:\tLastname:");
-				}				
+			if(i % 10 == 0){				
+				System.out.println("\nSORTED LIST BY " + s + " :\nSize:\tPrice:\tName:\tLastname:");
+			}				
 			System.out.println(laps[i].getSize() + "\t" + laps[i].getPrice() + "\t" + laps[i].user.getName() + "\t" + laps[i].user.getLastName());	
 		}			
 	}
@@ -82,14 +81,14 @@ static void sortBubble(String param, Laptop [] laps) {
 		
 		if (param.equals("name")) {
 			String [] arrayOfNames = {"Ivan", "Olga", "John", "Mila", "Alex", "Katya", "Serj", "Teffi", "Jim", "Anna", "Jack",
-										"Elza", "Boris", "Kendra", "Han", "Emma", "Igor'", "Julia", "Peter", "Kelly", "Grag"};
+									"Elza", "Boris", "Kendra", "Han", "Emma", "Igor'", "Julia", "Peter", "Kelly", "Grag"};
 			param = arrayOfNames[r.nextInt(arrayOfNames.length)];
-			} 
-			else if(param.equals("lastName")){
+		} 
+		else if(param.equals("lastName")){
 			String [] arrayOfLastNames = {"Ivanov(a)", "Kim", "Kirk", "Smirnov(a)", "Backham", "Black", "Snow", "Strong", "Key",
-											"Tramp", "Hall", "Lesin(a)", "Point", "Carter", "Durov(a)", "Hit", "Burg", "Valdau"};
+										"Tramp", "Hall", "Lesin(a)", "Point", "Carter", "Durov(a)", "Hit", "Burg", "Valdau"};
 			param = arrayOfLastNames[r.nextInt(arrayOfLastNames.length)];
-			}			
+		}			
 		return param;
 	}	
 }
@@ -98,8 +97,8 @@ class Laptop {
 	
 	private double price;
 	private double size;
-	User user = new User();
-		
+	User user;
+			
 	Laptop () {
 		price = 1000d;
 		size = 15.4d;
@@ -108,6 +107,14 @@ class Laptop {
 	Laptop (double myPrice, double mySize) {
 	price = myPrice;
 	size = 	mySize;		
+	}
+	
+	public User getUser () {
+		return user;		
+	}
+	
+	public void setUser (User userS) {
+		user = userS;			
 	}
 	
 	public double getPrice () {
@@ -124,7 +131,7 @@ class Laptop {
 	
 	public void setSize (double mySize) {
 		size = mySize;
-	}	
+	}
 }
 
 class User {
